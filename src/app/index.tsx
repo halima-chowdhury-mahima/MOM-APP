@@ -1840,7 +1840,7 @@ const styles = StyleSheet.create({
   // SEARCH
 
   searchOuter: {
-    paddingHorizontal: 18,
+    paddingHorizontal: 8,
     paddingTop: 12,
     paddingBottom: 16,
   },
@@ -1855,7 +1855,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
 
-    shadowColor: "#000",
+    shadowColor: "#5c5c5c",
     shadowOffset: {
       width: 0,
       height: 3,

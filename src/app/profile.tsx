@@ -5,6 +5,7 @@ import { router } from "expo-router";
 
 import {
   Alert,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -22,7 +23,22 @@ export default function ProfileScreen() {
   const displayPhone =
     savedPhone || user?.phone || "No phone added";
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+  try {
+    if (Platform.OS === "web") {
+      const confirmed = window.confirm(
+        "Are you sure you want to log out?"
+      );
+
+      if (!confirmed) {
+        return;
+      }
+
+      await logout();
+      router.replace("/login");
+      return;
+    }
+
     Alert.alert(
       "Log Out",
       "Are you sure you want to log out?",
@@ -36,15 +52,15 @@ export default function ProfileScreen() {
           style: "destructive",
           onPress: async () => {
             await logout();
-
-            router.replace(
-              "/login"
-            );
+            router.replace("/login");
           },
         },
       ]
     );
-  };
+  } catch (error) {
+    console.log("Logout failed:", error);
+  }
+};
 
   return (
     <View style={styles.page}>
